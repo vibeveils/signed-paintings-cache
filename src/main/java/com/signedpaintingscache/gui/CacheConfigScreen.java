@@ -79,8 +79,8 @@ public class CacheConfigScreen extends Screen {
         y = top;
         addRenderableWidget(new StringWidget(right, y + 4, BUTTON_WIDTH, 12, Component.translatable(K + "section.quality"), font));
         y += rowHeight;
-        cycle(right, y, "max_resolution", ints(256, 512, 1024, 2048, 4096, 0), () -> edit.maxImageResolution, v -> edit.maxImageResolution = v,
-                v -> v == 0 ? Component.translatable(K + "value.unlimited") : Component.literal(v + " px"));
+        cycle(right, y, "max_resolution", ints(0, 4096, 2048, 1024, 512, 256), () -> edit.maxImageResolution, v -> edit.maxImageResolution = v,
+                v -> v == 0 ? Component.translatable(K + "value.original") : Component.literal(v + " px"));
         y += rowHeight;
         cycle(right, y, "filter", Arrays.asList(ScalingFilter.values()), () -> edit.scalingFilter, v -> edit.scalingFilter = v,
                 v -> Component.translatable(v.translationKey()));

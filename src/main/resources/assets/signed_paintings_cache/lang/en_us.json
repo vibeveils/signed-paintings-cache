@@ -1,11 +1,9 @@
 {
   "modmenu.descriptionTranslation.signed_paintings_cache": "Keeps Signed Paintings images cached on disk between sessions, with quality, LOD and memory options.",
-
   "signed_paintings_cache.title": "Signed Paintings Cache",
   "signed_paintings_cache.section.cache": "Disk cache & downloads",
   "signed_paintings_cache.section.quality": "Quality, LOD & memory",
   "signed_paintings_cache.option.format": "%s: %s",
-
   "signed_paintings_cache.option.disk_cache": "Disk cache",
   "signed_paintings_cache.option.disk_cache.tooltip": "Save downloaded paintings to disk so they load instantly next session instead of being downloaded again.",
   "signed_paintings_cache.option.cache_size": "Cache size",
@@ -20,15 +18,14 @@
   "signed_paintings_cache.option.parallel_downloads.tooltip": "How many paintings can download at once. Lower values smooth out joining busy areas on slow connections.",
   "signed_paintings_cache.option.max_download": "Max image size",
   "signed_paintings_cache.option.max_download.tooltip": "Images bigger than this are refused, protecting you from huge files that freeze the game.",
-
   "signed_paintings_cache.option.max_resolution": "Max resolution",
-  "signed_paintings_cache.option.max_resolution.tooltip": "Longest side an image is kept at after loading. Lower = less RAM/VRAM and faster loading. Very large images are shrunk while decoding.",
-  "signed_paintings_cache.option.filter": "Resize filter",
-  "signed_paintings_cache.option.filter.tooltip": "Auto: crisp when enlarging (pixel art), smooth when shrinking (photos). Nearest: Signed Paintings' original blocky look. Smooth: best quality for shrinking large photos.",
+  "signed_paintings_cache.option.max_resolution.tooltip": "Shrinks images bigger than this when they load, to save RAM/VRAM. Original keeps every painting pixel-identical to what its placer sees (recommended unless you're low on memory).",
+  "signed_paintings_cache.option.filter": "Shrink filter",
+  "signed_paintings_cache.option.filter.tooltip": "Only used when an image is over Max resolution. Auto: pixel art and pixelated images keep an exact pixel grid, photos are shrunk smoothly. Pixels-per-block on signs always uses Signed Paintings' own resizing, so deliberate pixelation is never altered.",
   "signed_paintings_cache.option.hard_edges": "Keep hard edges",
-  "signed_paintings_cache.option.hard_edges.tooltip": "If an image only has fully opaque or fully clear pixels, keep it that way after smooth resizing, so it keeps rendering as cheap cutout instead of translucent.",
+  "signed_paintings_cache.option.hard_edges.tooltip": "When a photo is shrunk smoothly, keep images that only have fully opaque or fully clear pixels that way, so they stay on the cheaper cutout render path.",
   "signed_paintings_cache.option.texture_detail": "Texture detail",
-  "signed_paintings_cache.option.texture_detail.tooltip": "Scales every painting texture. Lower values save VRAM on low-end GPUs at the cost of sharpness.",
+  "signed_paintings_cache.option.texture_detail.tooltip": "Scales every painting texture (using Signed Paintings' own blocky resizing). Lower values save VRAM on low-end GPUs but change how paintings look.",
   "signed_paintings_cache.option.max_texture": "Max texture",
   "signed_paintings_cache.option.max_texture.tooltip": "Caps each painting's texture size, including ones with a high pixels-per-block setting.",
   "signed_paintings_cache.option.reuse_base": "Reuse for upscales",
@@ -37,7 +34,6 @@
   "signed_paintings_cache.option.vram_keep.tooltip": "How long a painting you can't see keeps its GPU texture. Longer = no re-upload hitch when you look back, but more VRAM.",
   "signed_paintings_cache.option.ram_keep": "Forget images after",
   "signed_paintings_cache.option.ram_keep.tooltip": "How long an unseen painting stays in memory. After that it's reloaded from the disk cache (not the web) when needed.",
-
   "signed_paintings_cache.value.on": "On",
   "signed_paintings_cache.value.off": "Off",
   "signed_paintings_cache.value.unlimited": "Unlimited",
@@ -46,22 +42,20 @@
   "signed_paintings_cache.value.immediately": "Immediately",
   "signed_paintings_cache.value.days": "%s days",
   "signed_paintings_cache.value.minutes": "%s min",
-
   "signed_paintings_cache.filter.auto": "Auto",
   "signed_paintings_cache.filter.nearest": "Nearest",
   "signed_paintings_cache.filter.bilinear": "Bilinear",
   "signed_paintings_cache.filter.bicubic": "Bicubic",
   "signed_paintings_cache.filter.smooth": "Smooth",
-
   "signed_paintings_cache.stats": "Cached: %s images (%s) · This session: %s from disk, %s downloaded, %s unchanged, %s failed",
   "signed_paintings_cache.button.clear": "Clear cache",
   "signed_paintings_cache.button.clear.tooltip": "Delete every cached image from disk. Paintings already on screen stay loaded.",
   "signed_paintings_cache.button.reset": "Defaults",
   "signed_paintings_cache.button.done": "Done",
-
   "signed_paintings_cache.command.stats.disk": "Painting cache: %s images, %s on disk",
   "signed_paintings_cache.command.stats.session": "This session: %s loaded from disk (%s), %s downloaded (%s), %s confirmed unchanged, %s served from an older copy while offline",
   "signed_paintings_cache.command.stats.failures": "Failures: %s total, %s currently waiting to retry, %s repeat requests skipped",
   "signed_paintings_cache.command.cleared": "Removed %s cached paintings",
-  "signed_paintings_cache.command.refreshed": "Re-checking %s painting textures with their servers"
+  "signed_paintings_cache.command.refreshed": "Re-checking %s painting textures with their servers",
+  "signed_paintings_cache.value.original": "Original"
 }

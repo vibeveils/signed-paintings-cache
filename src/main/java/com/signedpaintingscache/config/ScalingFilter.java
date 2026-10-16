@@ -1,7 +1,7 @@
 package com.signedpaintingscache.config;
 
 public enum ScalingFilter {
-    /** Nearest-neighbour when enlarging (keeps pixel art crisp), smooth when shrinking (no shimmering/jaggies). */
+    /** Pixel art and pixelated images keep an exact pixel grid; photos are shrunk smoothly. */
     AUTO,
     /** Signed Paintings' original behaviour: blocky everywhere. */
     NEAREST,

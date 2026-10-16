@@ -41,9 +41,9 @@ Stored in `config/signed_paintings_cache.json`.
 | Retry failed | 5 min | Back-off before retrying a broken/unreachable image |
 | Parallel downloads | 4 | Simultaneous downloads |
 | Max image size | 32 MB | Larger downloads are refused |
-| Max resolution | 2048 px | Longest side an image is kept at in memory |
-| Resize filter | Auto | Auto = crisp when enlarging (pixel art), smooth when shrinking (photos). Nearest = original look. Also Bilinear, Bicubic, Smooth |
-| Keep hard edges | On | Images with only opaque/clear pixels stay that way after smoothing, so they keep the cheaper cutout render path |
+| Max resolution | Original | Shrink images bigger than this on load to save memory. Original = pixel-identical to Signed Paintings |
+| Shrink filter | Auto | Only used for Max resolution. Auto keeps pixel art and pixelated images on an exact pixel grid and shrinks photos smoothly. Also Nearest, Bilinear, Bicubic, Smooth |
+| Keep hard edges | On | Cutout images stay opaque/clear after a smooth shrink, keeping the cheaper render path |
 | Texture detail | 100% | LOD: scales every painting texture down to save VRAM |
 | Max texture | Unlimited | LOD: caps each painting's texture, including high pixels-per-block ones |
 | Reuse for upscales | On | LOD: draw the original instead of making enlarged copies of small images (identical look, far less VRAM) |
@@ -51,6 +51,10 @@ Stored in `config/signed_paintings_cache.json`.
 | Forget images after | 15 min | How long an unseen image stays in RAM (then reloads from disk, not the web) |
 
 Changing a quality/LOD option rebuilds loaded paintings from the disk cache straight away.
+
+**Pixel fidelity:** the pixels-per-block setting on signs (and the sign editor preview) always runs Signed Paintings'
+own nearest-neighbour resizing, untouched, so deliberately pixelated paintings look exactly as their placer saw them.
+With default settings every painting is byte-identical to Signed Paintings without this mod.
 
 ## Commands
 
@@ -69,7 +73,7 @@ Requires JDK 25.
 ./gradlew build
 ```
 
-The jar is in `build/libs/signed_paintings_cache-1.0.0+mc26.3.jar`. Put it in `mods/` next to Signed Paintings
+The jar is in `build/libs/signed_paintings_cache-1.0.1+mc26.3.jar`. Put it in `mods/` next to Signed Paintings
 and Fabric API. `./gradlew runClient` starts a dev client with Signed Paintings loaded.
 
 `src/main/java/com/terraformersmc/` contains two compile-only copies of Mod Menu's API interfaces so the optional

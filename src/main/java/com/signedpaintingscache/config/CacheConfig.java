@@ -23,6 +23,10 @@ public final class CacheConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path FILE = FabricLoader.getInstance().getConfigDir().resolve("signed_paintings_cache.json");
 
+    /** Bumped when a default changes in a way existing config files should pick up. */
+    public int configVersion = 0;
+    private static final int CURRENT_VERSION = 2;
+
     // ---- Disk cache ----
     /** Keep downloaded images on disk between sessions. */
     public boolean diskCacheEnabled = true;
@@ -42,9 +46,12 @@ public final class CacheConfig {
     public int maxDownloadMB = 32;
 
     // ---- Quality ----
-    /** Longest side, in pixels, an image is kept at after decoding. 0 = unlimited (16384 hard safety cap). */
-    public int maxImageResolution = 2048;
-    /** How images are resized. */
+    /**
+     * Longest side, in pixels, an image is kept at after decoding. 0 = Original (16384 hard safety cap).
+     * Defaults to Original so paintings are pixel-identical to what their placer sees.
+     */
+    public int maxImageResolution = 0;
+    /** How images over Max resolution are shrunk. Never used for Signed Paintings' own pixels-per-block resizing. */
     public ScalingFilter scalingFilter = ScalingFilter.AUTO;
     /** If an image has only fully-opaque/fully-clear pixels, keep it that way after smooth resizing. */
     public boolean preserveHardEdges = true;
@@ -73,6 +80,11 @@ public final class CacheConfig {
             }
         }
         if (config == null) config = new CacheConfig();
+        if (config.configVersion < CURRENT_VERSION) {
+            // v1 shipped with a 2048px cap on by default, which could soften deliberately pixelated paintings.
+            if (config.maxImageResolution == 2048) config.maxImageResolution = 0;
+            config.configVersion = CURRENT_VERSION;
+        }
         config.sanitize();
         config.save();
         return config;
